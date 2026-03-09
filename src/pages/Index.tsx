@@ -7,7 +7,7 @@ import { dsaTopics } from '@/data/dsaContent';
 import ConceptCard from '@/components/dsa/ConceptCard';
 import VisualRepresentation from '@/components/dsa/VisualRepresentation';
 import { Button } from '@/components/ui/button';
-import { Rocket, Sparkles, Terminal, ChevronRight } from 'lucide-react';
+import { Rocket, Sparkles, Terminal, ChevronRight, Code2 } from 'lucide-react';
 
 const Index = () => {
   return (
