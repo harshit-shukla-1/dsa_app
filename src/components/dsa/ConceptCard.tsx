@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { ArrowUpRight, BookOpen, Layers } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { type Topic } from '@/data/dsaContent';
@@ -23,37 +24,41 @@ const ConceptCard = ({ topic, index }: ConceptCardProps) => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
-      className="group relative flex flex-col bg-card border rounded-3xl p-6 hover:shadow-2xl hover:shadow-primary/5 transition-all duration-300"
     >
-      <div className="flex justify-between items-start mb-4">
-        <Badge variant="secondary" className={`${difficultyColors[topic.difficulty]} border-none rounded-full px-3 py-1 font-semibold text-[10px] uppercase tracking-wider`}>
-          {topic.difficulty}
-        </Badge>
-        <button className="p-2 rounded-full bg-muted/50 text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-          <ArrowUpRight size={18} />
-        </button>
-      </div>
-
-      <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors">{topic.title}</h3>
-      <p className="text-muted-foreground text-sm line-clamp-2 mb-6 flex-grow">{topic.description}</p>
-
-      <div className="space-y-4">
-        <div className="flex items-center gap-2 text-xs text-muted-foreground font-medium">
-          <Layers size={14} className="text-primary/60" />
-          <span>Patterns: {topic.patterns.length}</span>
+      <Link 
+        to={`/topic/${topic.id}`}
+        className="group relative flex flex-col bg-card border rounded-[2.5rem] p-8 hover:shadow-2xl hover:shadow-primary/10 transition-all duration-500 hover:-translate-y-2 h-full"
+      >
+        <div className="flex justify-between items-start mb-6">
+          <Badge variant="secondary" className={`${difficultyColors[topic.difficulty]} border-none rounded-full px-4 py-1.5 font-bold text-[10px] uppercase tracking-widest`}>
+            {topic.difficulty}
+          </Badge>
+          <div className="p-2.5 rounded-full bg-muted/50 text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
+            <ArrowUpRight size={20} />
+          </div>
         </div>
-        
-        <div className="flex flex-wrap gap-1.5">
-          {topic.patterns.slice(0, 2).map((pattern, i) => (
-            <span key={i} className="text-[10px] bg-muted px-2 py-0.5 rounded-full border border-border">
-              {pattern}
-            </span>
-          ))}
-          {topic.patterns.length > 2 && (
-            <span className="text-[10px] text-muted-foreground flex items-center px-1">+{topic.patterns.length - 2}</span>
-          )}
+
+        <h3 className="text-2xl font-black mb-3 group-hover:text-primary transition-colors tracking-tight">{topic.title}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 mb-8 flex-grow">{topic.description}</p>
+
+        <div className="space-y-6 pt-6 border-t border-muted">
+          <div className="flex items-center gap-2 text-xs font-bold text-muted-foreground uppercase tracking-wider">
+            <Layers size={14} className="text-primary" />
+            <span>{topic.patterns.length} Essential Patterns</span>
+          </div>
+          
+          <div className="flex flex-wrap gap-2">
+            {topic.patterns.slice(0, 2).map((pattern, i) => (
+              <span key={i} className="text-[10px] bg-muted/50 px-3 py-1 rounded-full border border-border font-medium">
+                {pattern}
+              </span>
+            ))}
+            {topic.patterns.length > 2 && (
+              <span className="text-[10px] text-muted-foreground flex items-center px-1 font-bold">+{topic.patterns.length - 2} MORE</span>
+            )}
+          </div>
         </div>
-      </div>
+      </Link>
     </motion.div>
   );
 };
